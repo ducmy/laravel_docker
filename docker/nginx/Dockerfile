@@ -9,4 +9,4 @@ RUN apk update && \
 # nginx config file
 COPY ./docker/nginx/*.conf /etc/nginx/conf.d/
 
-WORKDIR /work/rakusel
+WORKDIR /work/project

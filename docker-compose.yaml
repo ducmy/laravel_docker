@@ -17,7 +17,7 @@ services:
           nocopy: true
       - type: bind
         source: ./
-        target: /work/public
+        target: /work/project
       - type: volume
         source: psysh-store
         target: /root/.config/psysh
@@ -41,7 +41,7 @@ services:
           nocopy: true
       - type: bind
         source: ./
-        target: /work/public
+        target: /work/project
     networks:
       - laravel_check_network
   db:

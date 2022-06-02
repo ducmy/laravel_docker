@@ -29,4 +29,4 @@ RUN apt-get update && \
 COPY ./docker/php/php-fpm.d/zzz-www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
-WORKDIR /work/rakusel
+WORKDIR /work/project
