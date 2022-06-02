@@ -16,7 +16,7 @@ services:
         volume:
           nocopy: true
       - type: bind
-        source: ./
+        source: ./projects/${APP_SRC}
         target: /work/project
       - type: volume
         source: psysh-store
@@ -40,7 +40,7 @@ services:
         volume:
           nocopy: true
       - type: bind
-        source: ./
+        source: ./projects/${APP_SRC}
         target: /work/project
     networks:
       - laravel_check_network
