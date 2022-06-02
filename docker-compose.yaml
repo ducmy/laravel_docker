@@ -1,0 +1,63 @@
+version: "3.9"
+volumes:
+  app-vol:
+  db-store:
+  psysh-store:
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: app_check
+    volumes:
+      - type: volume
+        source: app-vol
+        target: /var/run/php-fpm
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./
+        target: /work/public
+      - type: volume
+        source: psysh-store
+        target: /root/.config/psysh
+        volume:
+          nocopy: true
+    networks:
+      - laravel_check_network
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: nginx_check
+    ports:
+      - target: 80
+        published: 89
+    volumes:
+      - type: volume
+        source: app-vol
+        target: /var/run/php-fpm
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./
+        target: /work/public
+    networks:
+      - laravel_check_network
+  db:
+    container_name: database
+    image: "postgres:12"
+    ports:
+      - "5455:5432"
+    volumes:
+      - ./docker/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - laravel_check_network
+networks:
+  laravel_check_network:
+    driver: bridge
