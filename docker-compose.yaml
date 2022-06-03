@@ -45,7 +45,7 @@ services:
     networks:
       - laravel_check_network
   db:
-    container_name: database
+    container_name: pg_db
     image: "postgres:12"
     ports:
       - "5455:5432"
