@@ -12,7 +12,7 @@ services:
         volume:
           nocopy: true
       - type: bind
-        source: ./projects/${APP_SRC}
+        source: ./projects/${APP_SRC}/source
         target: /work/project
       - type: volume
         source: psysh-store
@@ -36,7 +36,7 @@ services:
         volume:
           nocopy: true
       - type: bind
-        source: ./projects/${APP_SRC}
+        source: ./projects/${APP_SRC}/source
         target: /work/project
     networks:
       - lara_nat
@@ -46,7 +46,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./docker/db:/var/lib/postgresql/data
+      - ./projects/${APP_SRC}/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123456
