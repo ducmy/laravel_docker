@@ -44,7 +44,7 @@ services:
     container_name: pg_db_service
     image: "postgres:12"
     ports:
-      - "5455:5432"
+      - "5432:5432"
     volumes:
       - ./docker/db:/var/lib/postgresql/data
     environment:
